@@ -1,0 +1,58 @@
+.tagcloud {
+	display: none;
+	position: relative;
+	margin: 0;
+	margin-bottom: floor($spacing / 2);
+	padding: floor($spacing / 4) floor($spacing / 4);
+	width: 100%;
+	color: $c8;
+	text-align: left;
+	border: 1px dashed $cd;
+	border-radius: $radius;
+	background: $ce;
+	list-style: none;
+	overflow: hidden;
+
+	&.active {
+		display: block;
+	}
+
+	.tag {
+		display: inline-block;
+		position: relative;
+		margin: 2px;
+		padding: 4px 8px;
+		padding-right: 28px;
+		color: $cf;
+		@include font-size($fontSize / 1.1);
+		border-radius: $radius;
+		background: $brand1;
+		cursor: pointer !important;
+		white-space: nowrap;
+
+		&:hover {
+			background-color: $brand2;
+		}
+		&:active {
+			background-color: $brand3;
+		}
+
+		.icon {
+			display: block;
+			position: absolute;
+			width: 12px;
+			height: 12px;
+			top: 11px;
+			right: 8px;
+			@include svgColor($cf);
+		}
+
+		@for $i from 0 through 4 {
+			&[data-tag-group="#{$i}"] {
+				// background-color: darken($brand1, percentage($i / 10));
+				// background-color: lighten($brand1, percentage($i / 10));
+				background-color: adjust-hue($brand1, -($i * 45));
+			}
+		}
+	}
+}

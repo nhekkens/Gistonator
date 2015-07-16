@@ -1,0 +1,271 @@
+// Responsive
+
+@media screen and (max-width: $screenWide) {
+
+	.search-results {
+		&[data-view="grid"] {
+			.search-item {
+				width: percentage(3 / 12) - 2;
+			}
+		}
+	}
+
+}
+
+
+
+@media screen and (max-width: $screenDesktop) {
+
+	.wrapper {
+		width: 100%;
+	}
+
+
+	// Map
+
+	.map-wrapper {
+		height: 60vw;
+	}
+
+
+	// Search
+
+	.search-results {
+		&[data-view="grid"] {
+			.search-item {
+				width: percentage(4 / 12) - 2;
+			}
+		}
+	}
+
+}
+
+
+
+@media screen and (max-width: $screenTabletL) {
+
+	.mobile-show {
+		display: block !important;
+	}
+	.mobile-hide {
+		display: none !important;
+	}
+
+	.table-mirror {
+		display: block !important;
+	}
+
+
+	// Font sizes
+
+	.structure.clean {
+		@include font-size($fontSize / 1.1);
+	}
+
+
+	// Widths
+
+	.column {
+		width: 100% !important;
+
+		@for $i from 1 through ($columns / 4) {
+			&[data-span="#{$i}"] {
+				width: 50% !important;
+			}
+		}
+
+		@for $i from 1 through ($columns / 6) {
+			&[data-span="#{$i}"] {
+				width: 33.333% !important;
+			}
+		}
+	}
+
+	.button,
+	button,
+	input[type="reset"],
+	input[type="submit"],
+	input[type="button"] {
+		margin-bottom: 4px;
+	}
+
+
+	// Forms
+
+	input,
+	select,
+	textarea,
+	.input-addon,
+	.password-wrapper,
+	.file-wrapper,
+	.dropdown-wrapper {
+		width: 100% !important;
+	}
+
+	input[type="radio"],
+	input[type="checkbox"] {
+		width: auto;
+	}
+
+	.input-group {
+		input {
+			text-align: left;
+
+			&:first-child {
+				border-top-radius: $radius;
+				border-bottom-radius: 0;
+			}
+			&:last-child {
+				border-top-radius: 0;
+				border-bottom-radius: $radius;
+			}
+		}
+
+		.input-addon {
+			text-align: left;
+			border: 1px solid $cd;
+			border-top: 0;
+			border-bottom: 0;
+		}
+	}
+
+	.multifile-info {
+		display: none !important;
+	}
+
+
+	// Search
+
+	.search-results {
+		&[data-view="grid"] {
+			.search-item {
+				width: percentage(6 / 12) - 2;
+			}
+		}
+	}
+
+
+	// Tables
+
+	.table-original {
+		display: none;
+	}
+
+	table {
+		caption {
+			@include font-size($fontSize);
+			text-align: center;
+		}
+
+		tr {
+			th,
+			td {
+				&:last-child {
+					font-weight: normal;
+					text-align: left;
+					background: none;
+				}
+			}
+		}
+	}
+
+
+	// Notification
+
+	.notification-wrapper {
+		width: 96%;
+	}
+
+
+	// Tooltips
+
+	.tooltip {
+		cursor: default;
+	}
+
+
+	// Slider
+
+	.slider {
+		&:hover {
+			.slider-arrow {
+				@include opacity(1);
+			}
+		}
+	}
+
+	.slider-arrow {
+		@include opacity(1);
+
+		&.slider-arrow-prev {
+			margin-left: 0;
+		}
+		&.slider-arrow-next {
+			margin-right: 0;
+		}
+	}
+
+
+	// Twitter
+
+	[data-twitter] {
+		&.twitter-main {
+			.twitter-follow {
+				position: relative !important;
+				margin: floor($spacing / 1.5) auto 0 !important;
+				top: 0;
+				right: 0;
+			}
+		}
+	}
+
+}
+
+
+
+@media screen and (max-width: $screenTabletS) {
+
+}
+
+
+
+@media screen and (max-width: $screenMobileL) {
+
+
+	// Columns
+
+	.column {
+		width: 100% !important;
+
+		@for $i from 1 through ($columns / 4) {
+			&[data-span="#{$i}"] {
+				width: 100% !important;
+			}
+		}
+
+		@for $i from 1 through ($columns / 6) {
+			&[data-span="#{$i}"] {
+				width: 50% !important;
+			}
+		}
+	}
+
+
+	// Search
+
+	.search-results {
+		&[data-view="grid"] {
+			.search-item {
+				width: auto;
+			}
+		}
+	}
+
+
+}
+
+
+
+@media screen and (max-width: $screenMobileS) {
+
+}

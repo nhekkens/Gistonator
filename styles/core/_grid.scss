@@ -1,0 +1,40 @@
+// Grid System
+
+.row {
+	display: block;
+	position: relative;
+	margin: (-$gutter / 2);
+	font-size: 0;
+
+	> * {
+		@include font-size($fontSize);
+	}
+
+	.column {
+		display: inline-block;
+		position: relative;
+		margin: 0;
+		padding: $gutter / 2;
+		width: 100%;
+		vertical-align: top;
+
+		@for $i from 1 through $columns {
+			&[data-span="#{$i}"] {
+				width: percentage($i / $columns);
+			}
+		}
+	}
+
+	.cell {
+		display: block;
+		position: relative;
+		padding: floor($spacing / 2);
+	}
+}
+
+.debug {
+	.cell {
+		border: 1px dashed $cd;
+		background: $ce;
+	}
+}

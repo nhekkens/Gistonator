@@ -1,0 +1,363 @@
+.search-wrapper {
+	display: block;
+	position: relative;
+}
+
+.search-container {
+	display: block;
+	position: relative;
+	text-align: center;
+}
+
+.search-controls {
+	display: block;
+	position: relative;
+	text-align: left;
+
+	.search-count {
+		display: none;
+		position: relative;
+		margin: 0;
+		margin-top: floor($spacing / 2);
+		padding: 5px 12px;
+		@include font-size($fontSize / 1.2);
+		color: #888;
+		border: 1px dotted $ce;
+		border-bottom: 0;
+		border-top-left-radius: 4px;
+		border-top-right-radius: 4px;
+		background: #f2f2f2;
+	}
+
+	.search-views {
+		display: block;
+		position: relative;
+		float: right;
+		margin: 0;
+		margin-top: floor($spacing / 2) + 3;
+		padding: 5px;
+		font-size: 0;
+		color: $c8;
+		border: 1px dotted $cd;
+		border-bottom: 0;
+		border-top-left-radius: 4px;
+		border-top-right-radius: 4px;
+		background: #f2f2f2;
+
+		.search-view {
+			display: inline-block;
+			position: relative;
+			margin: 0 6px;
+			padding: 0;
+			width: 18px;
+			height: 18px;
+			cursor: pointer;
+
+			&:hover,
+			&.active {
+				.icon {
+					@include svgColor($brand1);
+				}
+			}
+
+			.icon {
+				display: block;
+				@include svgColor($ca);
+			}
+		}
+	}
+}
+
+
+.search-load {
+	display: none;
+	width: 280px;
+}
+
+.search-pagination {
+	display: none;
+	text-align: center;
+
+	button {
+		display: inline-block !important;
+		margin: 0 2px;
+		width: auto !important;
+	}
+}
+
+
+.search-results {
+	display: block;
+	position: relative;
+	margin: 0 -1% floor($spacing / 2);
+	padding: 0;
+	font-size: 0;
+	text-align: left;
+	border-top: 1px dotted $cd;
+	border-bottom: 1px dotted $cd;
+	background-color: $cf;
+
+	> * {
+		@include font-size($fontSize);
+	}
+
+	&.no-results {
+		padding: floor($spacing / 1.8);
+		@include font-size($fontSize);
+
+		&:before {
+			color: $brand1;
+			content: "Your search returned no results. Tweak it and try again."
+		}
+	}
+
+	&.loading {
+		height: 300px;
+		background: transparent url('../img/loader.gif') no-repeat center center;
+	}
+
+
+	// Elements
+
+	.search-item {
+		position: relative;
+		margin: 1%;
+		padding: 0;
+		border-radius: $radius;
+		border: 1px solid $cd;
+		background-color: $cf;
+		vertical-align: top !important;
+		@include opacity(1);
+		transform: scale(1) translateY(0);
+		transition-property: transform, opacity;
+		transition-duration: $animDuration;
+		transition-timing-function: $animEasing;
+
+		&.loading {
+			position: absolute !important;
+			top: 0;
+			left: 0;
+			visibility: hidden;
+			z-index: -1;
+			@include opacity(0);
+			transform: scale(1.1) translateY(50px);
+		}
+
+		> * {
+			vertical-align: top;
+		}
+
+		.img {
+			display: block;
+			position: relative;
+			text-align: center;
+			overflow: hidden;
+			background-size: cover !important;
+		}
+		.title {
+			display: block;
+			position: relative;
+			margin-bottom: 5px;
+			padding: 0 floor($spacing / 2);
+			font-family: $headingFont;
+			@include font-size($fontSize * 1.2);
+		}
+		.date {
+			display: block;
+			position: relative;
+			padding: 0 floor($spacing / 2);
+			color: $c8;
+			@include font-size($fontSize / 1.2);
+		}
+		.type {
+			display: block;
+			position: absolute;
+			padding: 3px 7px;
+			max-width: 125px;
+			top: 0;
+			left: 0;
+			color: $cf;
+			@include font-size($fontSize / 1.3);
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			border-top-left-radius: $radius;
+			border-bottom-right-radius: $radius;
+			background-color: $brand2;
+			overflow: hidden;
+			z-index: 10;
+		}
+		.summary {
+			display: block;
+			position: relative;
+			margin: floor($spacing / 2) 0;
+			padding: 0 floor($spacing / 2);
+			padding-bottom: 18px;
+			@include font-size($fontSize / 1.1);
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		.info {
+			position: absolute;
+			bottom: floor($spacing / 2);
+			font-size: 0;
+			white-space: nowrap;
+
+			.categories {
+				display: block;
+				position: relative;
+				float: left;
+				color: $brand2;
+				@include font-size($fontSize / 1.2);
+			}
+
+			.tags {
+				display: block;
+				position: relative;
+				float: right;
+				color: $brand3;
+				@include font-size($fontSize / 1.2);
+			}
+		}
+	}
+
+
+	// Views
+
+	&[data-view="grid"] {
+		.search-item {
+			display: inline-block;
+			width: percentage(4 / 12) - 2;
+
+			.img {
+				margin-bottom: 5px;
+				padding-top: 62.5%;
+				width: 100%;
+			}
+
+			.info {
+				padding: 0 floor($spacing / 2);
+				width: 100%;
+			}
+		}
+	}
+
+	&[data-view="list"] {
+		.search-item {
+			display: block;
+			padding-left: 165px;
+
+			.img {
+				position: absolute;
+				width: 165px;
+				height: 100%;
+				top: 0;
+				left: 0;
+			}
+
+			.title {
+				margin-top: floor($spacing / 4);
+				width: 100%;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+			}
+
+			.info {
+				padding: 0 floor($spacing / 2);
+				right: 0;
+
+				* {
+					display: inline-block;
+					float: none;
+				}
+
+				.tags {
+					margin-left: floor($spacing / 2);
+				}
+			}
+		}
+	}
+
+	&.mini {
+		.search-item {
+			padding: floor($spacing / 2) floor($spacing / 1.5);
+			font-size: 0;
+
+			> * {
+				padding: 0 !important;
+			}
+
+			.title {
+				margin-top: 0 !important;
+			}
+
+			.type {
+				display: block;
+				position: relative;
+				padding: 0;
+				max-width: none;
+				top: 0;
+				left: 0;
+				right: auto;
+				@include font-size($fontSize / 1.2);
+				color: $brand1;
+				background: none;
+				box-shadow: none;
+
+				&:before {
+					content: "Type: ";
+				}
+			}
+
+			.summary {
+				margin-bottom: 0;
+			}
+
+			.info {
+				display: inline-block;
+				position: relative;
+				bottom: 0;
+
+				* {
+					float: none !important;
+				}
+			}
+
+			.img,
+			.date,
+			.type,
+			.info {
+				display: none;
+			}
+		}
+
+		&[data-view="grid"] {
+			.search-item {
+				.info {
+					margin-top: 5px;
+
+					* {
+						&:before {
+							content: "View ";
+						}
+					}
+				}
+			}
+		}
+		&[data-view="list"] {
+			.search-item {
+				.date,
+				.type,
+				.info {
+					// display: inline-block;
+					margin-right: floor($spacing / 2);
+
+					* {
+						display: inline-block !important;
+					}
+				}
+			}
+		}
+	}
+}

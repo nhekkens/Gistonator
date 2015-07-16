@@ -1,0 +1,151 @@
+iframe[src*="youtube"],
+iframe[src*="vimeo"] {
+	display: none;
+}
+
+.video-frame {
+	display: block;
+	position: relative;
+	margin: $spacing 0;
+	padding-bottom: 55.5%;
+	width: 100%;
+	border-left: 7px solid $brand1;
+	border-radius: $radius;
+	overflow: hidden;
+
+	&.loaded {
+		.video-thumb {
+			cursor: pointer;
+		}
+
+		.video-loader {
+			@include opacity(0);
+			visibility: hidden;
+		}
+
+		.video-button {
+			@include opacity(1);
+			cursor: pointer;
+		}
+	}
+
+	&.playing {
+		.video-overlay,
+		.video-thumb {
+			@include opacity(0);
+			visibility: hidden;
+		}
+
+		.video-button {
+			margin: 0;
+			width: 0;
+			height: 0;
+			@include opacity(0);
+
+			.icon {
+				transform: rotate(180deg);
+			}
+		}
+	}
+
+
+	iframe {
+		display: block;
+		position: absolute;
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.video-thumb {
+		display: block;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		@include opacity(0.75);
+		background-position: center center !important;
+		background-size: cover !important;
+		z-index: 15;
+		transition: opacity $animDuration $animEasing;
+
+		&:hover {
+			+ .video-button {
+				.icon {
+					@include svgColor($brand2);
+				}
+			}
+		}
+	}
+
+	.video-overlay {
+		display: block;
+		position: absolute;
+		margin: 0;
+		width: 100%;
+		height: 100%;
+		background: $cf;
+		z-index: 10;
+		transition: opacity $animDuration $animEasing;
+	}
+
+
+	.video-loader {
+		display: block;
+		position: absolute;
+		padding: $spacing;
+		margin-bottom: -42px;
+		margin-right: -42px;
+		width: 84px;
+		height: 84px;
+		right: 50%;
+		bottom: 50%;
+		border-radius: 1000px;
+		background: $cf;
+		z-index: 20;
+		@include opacity(1);
+		transition: opacity $animDuration $animEasing;
+	}
+
+	.video-button {
+		display: block;
+		position: absolute;
+		margin-left: -42px;
+		margin-bottom: -42px;
+		width: 84px;
+		height: 84px;
+		left: 50%;
+		bottom: 50%;
+		text-align: center;
+		border-radius: 1000px;
+		background: $c3;
+		z-index: 25;
+		@include opacity(0);
+		transition: all ($animDuration) $animEasing;
+
+		@extend .valign-middle;
+
+		&:hover {
+			.icon {
+				@include svgColor($brand2);
+			}
+		}
+
+		.icon {
+			position: relative;
+			margin: 0 auto;
+			width: 45%;
+			height: 45%;
+			left: 3px;
+			@include svgColor($brand1);
+			transition: all ($animDuration) $animEasing;
+
+			* {
+				transition: all ($animDuration) $animEasing;
+			}
+
+			&.icon-pause {
+				display: none !important;
+			}
+		}
+	}
+}
